@@ -32,6 +32,30 @@ cd vehicleTelemetry
 docker-compose up --build
 
 ```
+
+## Usage
+```bash
+# Inserting data
+curl -X POST -F "file=@LD_A5304997_20230331_20230401.csv" http://localhost:8080/vehicles/importCsv
+
+# Filtering data
+# Endpoint POST
+localhost:8080/vehicles/filter
+
+# Body request
+[{
+    "field": "Type",
+    "value": "tractor"
+},
+{
+    "field": "Engine load [%]",
+    "value": 30,
+    "operation": "GreaterThan"
+}]
+
+
+```
+
 ## Further improvements
 Besides all fields from CSV documents, in MongoDB document is created new field "**Type**" indicating type of vehicle based on
 filename. Indexing should be considered. From my point of view i guess user will maybe track just tractors or just combines
